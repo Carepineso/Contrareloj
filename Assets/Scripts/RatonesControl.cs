@@ -14,11 +14,13 @@ public class RatonesControl : MonoBehaviour
     public estados estado;
     public GameObject[] killPoints;
     public Transform killPoint;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
         destination = agent.destination;
         BuscarBunuelos();
     }
@@ -52,14 +54,17 @@ public class RatonesControl : MonoBehaviour
     {
         bunuelos = GameObject.FindGameObjectsWithTag("Bunuelo");
         bunuelo = bunuelos[Random.Range(0, bunuelos.Length)].transform;
+        animator.SetBool("Comer", false);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Bunuelo"))
         {
-            Destroy(other.gameObject);
-            Invoke("BuscarBunuelos", 0.1f);
+            Destroy(other.gameObject,5);
+            bunuelo = other.transform;
+            animator.SetBool("Comer", true);
+            Invoke("BuscarBunuelos", 5f);
         }
 
         if (other.CompareTag("Lanzallamas"))
@@ -67,6 +72,7 @@ public class RatonesControl : MonoBehaviour
             killPoints = GameObject.FindGameObjectsWithTag("Creador");
             killPoint = killPoints[Random.Range(0,killPoints.Length)].transform;
             agent.speed = agent.speed * 2;
+            animator.SetBool("Vivo", false);
             estado = estados.muerto;
         }
     }
