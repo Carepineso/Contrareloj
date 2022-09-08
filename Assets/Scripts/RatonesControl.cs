@@ -8,11 +8,13 @@ public class RatonesControl : MonoBehaviour
 {
     public GameObject[] bunuelos;
     public Transform bunuelo;
-    float velocidad_raton= 2.0f;
     int random = 0;
     Vector3 destination;
     NavMeshAgent agent;
-    
+    public estados estado;
+    public GameObject[] killPoints;
+    public Transform killPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +26,26 @@ public class RatonesControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(destination, bunuelo.position) > 1.0f)
+        switch (estado)
         {
-            destination = bunuelo.position;
-            agent.destination = destination;
+            case estados.vivo:
+                if (Vector3.Distance(destination, bunuelo.position) > 1.0f)
+                {
+                    if (bunuelo!=null)
+                    {
+                        destination = bunuelo.position;
+                    }
+                    agent.destination = destination;
 
+                }
+                break;
+            case estados.muerto:
+                agent.destination = killPoint.position;
+                break;
+            default:
+                break;
         }
+
     }
 
     void BuscarBunuelos()
@@ -43,12 +59,20 @@ public class RatonesControl : MonoBehaviour
         if(other.CompareTag("Bunuelo"))
         {
             Destroy(other.gameObject);
-            BuscarBunuelos();
+            Invoke("BuscarBunuelos", 0.1f);
         }
 
         if (other.CompareTag("Lanzallamas"))
         {
-            Destroy(this.gameObject);
+            killPoints = GameObject.FindGameObjectsWithTag("Creador");
+            killPoint = killPoints[Random.Range(0,killPoints.Length)].transform;
+            agent.speed = agent.speed * 2;
+            estado = estados.muerto;
         }
     }
+}
+public enum estados
+{
+    vivo, 
+    muerto
 }
