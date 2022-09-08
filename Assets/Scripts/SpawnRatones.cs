@@ -7,11 +7,11 @@ public class SpawnRatones : MonoBehaviour
     public Transform[] spawnPaints;
     public GameObject prefabEnemy;
     private int random = 0;
-    private int enemigos = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(TSpawn());
     }
 
     IEnumerator TSpawn()
