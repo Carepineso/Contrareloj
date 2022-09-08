@@ -19,7 +19,7 @@ public class SpawnRatones : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(4.0f, 14.0f));
+            yield return new WaitForSeconds(Random.Range(2.0f, 8.0f));
             random = Random.Range(0, spawnPaints.Length);
             GameObject gameObject = Instantiate<GameObject>(prefabEnemy, spawnPaints[random].position, Quaternion.identity);
         }
