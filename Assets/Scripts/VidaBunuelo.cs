@@ -15,6 +15,7 @@ public class VidaBunuelo : MonoBehaviour
             if (vidaMax == 0)
             {
                 Destroy(this.gameObject);
+                ControlJuego.controlJuego.ContaBunuelos();
             }
 
         }

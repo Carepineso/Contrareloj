@@ -62,7 +62,6 @@ public class RatonesControl : MonoBehaviour
         {
             bunuelo = other.transform;
             animator.SetBool("Comer", true);
-            ControlJuego.controlJuego.ContaBunuelos();
             if (ControlJuego.controlJuego.contBun == 4)
             {
                 animator.SetTrigger("Gana");
@@ -70,7 +69,7 @@ public class RatonesControl : MonoBehaviour
             Invoke("BuscarBunuelos", 5f);
         }
 
-        if (other.CompareTag("Lanzallamas"))
+        if (other.CompareTag("Lanzallamas") && estado == estados.vivo)
         {
             killPoints = GameObject.FindGameObjectsWithTag("Creador");
             killPoint = killPoints[Random.Range(0,killPoints.Length)].transform;
@@ -78,6 +77,7 @@ public class RatonesControl : MonoBehaviour
             animator.SetBool("Vivo", false);
             estado = estados.muerto;
             ControlJuego.controlJuego.ContaRatones();
+            PlayerPrefs.SetInt("Ratones", ControlJuego.controlJuego.contRat);
         }
     }
 }
