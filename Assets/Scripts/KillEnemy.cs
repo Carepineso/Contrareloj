@@ -5,6 +5,7 @@ using UnityEngine;
 public class KillEnemy : MonoBehaviour
 {
     public Collider coli;
+    public bool dispara = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,14 @@ public class KillEnemy : MonoBehaviour
     void Update()
     {
         OnOff();
+        if (coli.enabled)
+        {
+            dispara = true;
+        }
+        else
+        {
+            dispara = false;
+        }
     }
 
     void OnOff()
@@ -23,10 +32,12 @@ public class KillEnemy : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             coli.enabled = coli.enabled;
+
         }
         else if (Input.GetKeyUp(KeyCode.Space))
         {
             coli.enabled = !coli.enabled;
+            
         }
     }
 }
