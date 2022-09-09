@@ -61,9 +61,13 @@ public class RatonesControl : MonoBehaviour
     {
         if(other.CompareTag("Bunuelo"))
         {
-            Destroy(other.gameObject,5);
             bunuelo = other.transform;
             animator.SetBool("Comer", true);
+            ControlJuego.controlJuego.ContaBunuelos();
+            if (ControlJuego.controlJuego.contBun == 4)
+            {
+                animator.SetTrigger("Gana");
+            } 
             Invoke("BuscarBunuelos", 5f);
         }
 
@@ -74,6 +78,7 @@ public class RatonesControl : MonoBehaviour
             agent.speed = agent.speed * 2;
             animator.SetBool("Vivo", false);
             estado = estados.muerto;
+            ControlJuego.controlJuego.ContaRatones();
         }
     }
 }
