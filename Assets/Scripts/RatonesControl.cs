@@ -8,7 +8,6 @@ public class RatonesControl : MonoBehaviour
 {
     public GameObject[] bunuelos;
     public Transform bunuelo;
-    int random = 0;
     Vector3 destination;
     NavMeshAgent agent;
     public estados estado;
