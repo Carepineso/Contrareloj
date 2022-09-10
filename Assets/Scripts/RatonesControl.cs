@@ -30,7 +30,7 @@ public class RatonesControl : MonoBehaviour
         switch (estado)
         {
             case estados.vivo:
-                if (Vector3.Distance(destination, bunuelo.position) > 1.0f)
+                if (bunuelo!=null && Vector3.Distance(destination, bunuelo.position) > 1.0f)
                 {
                     if (bunuelo!=null)
                     {
