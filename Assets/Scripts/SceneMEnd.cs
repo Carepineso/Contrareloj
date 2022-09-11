@@ -25,7 +25,7 @@ public class SceneMEnd : MonoBehaviour
 
     public void GameInicio()
     {
-        SceneManager.LoadScene("Inicio");
+        SceneManager.LoadScene("Incio");
     }
     public void GameOver()
     {
